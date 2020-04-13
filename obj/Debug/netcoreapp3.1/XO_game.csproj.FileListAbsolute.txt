@@ -1,0 +1,12 @@
+/Users/shahzod/Projects/XO_game/bin/Debug/netcoreapp3.1/XO_game.deps.json
+/Users/shahzod/Projects/XO_game/bin/Debug/netcoreapp3.1/XO_game.runtimeconfig.json
+/Users/shahzod/Projects/XO_game/bin/Debug/netcoreapp3.1/XO_game.runtimeconfig.dev.json
+/Users/shahzod/Projects/XO_game/bin/Debug/netcoreapp3.1/XO_game.dll
+/Users/shahzod/Projects/XO_game/bin/Debug/netcoreapp3.1/XO_game.pdb
+/Users/shahzod/Projects/XO_game/obj/Debug/netcoreapp3.1/XO_game.csprojAssemblyReference.cache
+/Users/shahzod/Projects/XO_game/obj/Debug/netcoreapp3.1/XO_game.csproj.CoreCompileInputs.cache
+/Users/shahzod/Projects/XO_game/obj/Debug/netcoreapp3.1/XO_game.AssemblyInfoInputs.cache
+/Users/shahzod/Projects/XO_game/obj/Debug/netcoreapp3.1/XO_game.AssemblyInfo.cs
+/Users/shahzod/Projects/XO_game/obj/Debug/netcoreapp3.1/XO_game.dll
+/Users/shahzod/Projects/XO_game/obj/Debug/netcoreapp3.1/XO_game.pdb
+/Users/shahzod/Projects/XO_game/obj/Debug/netcoreapp3.1/XO_game.genruntimeconfig.cache
