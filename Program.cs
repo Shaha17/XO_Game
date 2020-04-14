@@ -9,6 +9,7 @@ namespace XO_game
             //1 - X
             //2 - O
         static int moves = 0;
+        static int GameRez = 0;
         static bool flag = true; 
             //true - X move
             //false - O move
@@ -23,6 +24,7 @@ namespace XO_game
                     board[i,j] = 0;
             flag = true;
             moves = 0;
+            GameRez = 0;
         }
         public static int GameWinner()
         {
@@ -74,13 +76,13 @@ namespace XO_game
                         Console.Write("X ");
                     else if(board[i,j] == 2)
                         Console.Write("O ");
-                    else if(board[i,j] == 9)
+                    else if(board[i,j] == 3)
                         {
                             Console.ForegroundColor = ConsoleColor.Green;
                             Console.Write("X ");
                             Console.ForegroundColor = ConsoleColor.White;
                         }
-                    else if(board[i,j] == 10)
+                    else if(board[i,j] == 4)
                         {
                             Console.ForegroundColor = ConsoleColor.Green;
                             Console.Write("O ");
@@ -95,7 +97,7 @@ namespace XO_game
             if(flag)
                 Console.WriteLine("Ход крестиков: ");
             else Console.WriteLine("Ход ноликов: ");
-            if(!(int.TryParse(Console.ReadLine(), out tempInput)))
+            if(!(int.TryParse(Console.ReadLine(), out tempInput)) || tempInput < 1 || 9 < tempInput)
             {
                 Console.WriteLine("Ошибка ввода, введите заново...");
                 InputMove();
@@ -109,17 +111,16 @@ namespace XO_game
         }
         static void Main()
         {
-            do//Цикл для бесконечного повтора игры
+            while(true)//Цикл для бесконечного повтора игры
             {
                 do//Цикл для принятия ходов
                 {    
                     do//Цикл для проверки ходов
                     {
-                        Console.Clear();
-                        ShowBoard();
-                        InputMove();
-                    }
-                    while(tempInput < 1 || 9 < tempInput);
+                    Console.Clear();
+                    ShowBoard();
+                    InputMove();
+                    } while(tempInput < 1 || 9 < tempInput);
                     x = (tempInput - 1) / 3;
                     y = (tempInput - 1) % 3;
                     boardHistory[tempInput - 1] = true;
@@ -127,13 +128,13 @@ namespace XO_game
                     ShowBoard();
                     moves++;
                     flag = !flag;
-                }
-                while(GameWinner()==0 && moves < 9);
-                if(GameWinner() == 0)
+                    GameRez = GameWinner();
+                } while(GameRez==0 && moves < 9);
+                if(GameRez == 0)
                     Console.WriteLine("Ничья");
-                else if(GameWinner() == 9)
+                else if(GameRez == 3)
                     Console.WriteLine("Победили крестики");
-                else if(GameWinner() == 10)
+                else if(GameRez == 4)
                     Console.WriteLine("Победили нолики");
                 Console.Clear();
                 ShowBoard();
@@ -141,7 +142,6 @@ namespace XO_game
                 Console.ReadKey();
                 RestartGame();
             }
-            while(true);
         }
     }
 }
