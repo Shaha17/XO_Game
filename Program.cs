@@ -4,15 +4,17 @@ namespace XO_game
 {
     class Program
     {
+        static string Choose;
+        static char p1 = 'X', p2 = 'O';
         static int[,] board = {{0,0,0},{0,0,0},{0,0,0}};
             //0 - nothing
-            //1 - X
-            //2 - O
+            //1 - p1(X)
+            //2 - p2(O)
         static int moves = 0;
-        static int GameRez = 0;
+        static int gameRez = 0;
         static bool flag = true; 
-            //true - X move
-            //false - O move
+            //true - p1(X) move
+            //false - p2(O) move
         static int x, y, tempInput;
         static bool[] boardHistory = new bool[9];
         public static void RestartGame()
@@ -24,7 +26,7 @@ namespace XO_game
                     board[i,j] = 0;
             flag = true;
             moves = 0;
-            GameRez = 0;
+            gameRez = 0;
         }
         public static int GameWinner()
         {
@@ -73,19 +75,19 @@ namespace XO_game
                     if(board[i,j] == 0)
                         Console.Write("_ ");
                     else if(board[i,j] == 1)
-                        Console.Write("X ");
+                        Console.Write(p1 + " ");
                     else if(board[i,j] == 2)
-                        Console.Write("O ");
+                        Console.Write(p2 + " ");
                     else if(board[i,j] == 3)
                         {
                             Console.ForegroundColor = ConsoleColor.Green;
-                            Console.Write("X ");
+                            Console.Write(p1 + " ");
                             Console.ForegroundColor = ConsoleColor.White;
                         }
                     else if(board[i,j] == 4)
                         {
                             Console.ForegroundColor = ConsoleColor.Green;
-                            Console.Write("O ");
+                            Console.Write(p2 + " ");
                             Console.ForegroundColor = ConsoleColor.White;
                         }
                 Console.WriteLine();
@@ -95,8 +97,8 @@ namespace XO_game
         public static void InputMove()
         {
             if(flag)
-                Console.WriteLine("Ход крестиков: ");
-            else Console.WriteLine("Ход ноликов: ");
+                Console.WriteLine("Ход " + p1 + ": ");
+            else Console.WriteLine("Ход " + p2 + ": ");
             if(!(int.TryParse(Console.ReadLine(), out tempInput)) || tempInput < 1 || 9 < tempInput)
             {
                 Console.WriteLine("Ошибка ввода, введите заново...");
@@ -109,10 +111,33 @@ namespace XO_game
                     InputMove();
                 }
         }
+        public static void SideChoose(int playerNum)
+        {
+            if(playerNum == 1)
+            {
+                Console.WriteLine("Символ для первого игрока:");
+                Choose = Console.ReadLine().ToUpper();
+                p1 = Choose[0];
+            }
+            if(playerNum == 2)
+            {
+                Console.WriteLine("Символ для второго игрока:");
+                Choose = Console.ReadLine().ToUpper();
+                p2 = Choose[0];
+                if(p1 == p2)
+                {
+                    Console.WriteLine("Одинаковые символы, выберите заново...");
+                    SideChoose(2);
+                }
+            }
+        }
+
         static void Main()
         {
             while(true)//Цикл для бесконечного повтора игры
             {
+                SideChoose(1);
+                SideChoose(2);
                 do//Цикл для принятия ходов
                 {    
                     do//Цикл для проверки ходов
@@ -128,14 +153,14 @@ namespace XO_game
                     ShowBoard();
                     moves++;
                     flag = !flag;
-                    GameRez = GameWinner();
-                } while(GameRez==0 && moves < 9);
-                if(GameRez == 0)
+                    gameRez = GameWinner();
+                } while(gameRez==0 && moves < 9);
+                if(gameRez == 0)
                     Console.WriteLine("Ничья");
-                else if(GameRez == 3)
-                    Console.WriteLine("Победили крестики");
-                else if(GameRez == 4)
-                    Console.WriteLine("Победили нолики");
+                else if(gameRez == 3)
+                    Console.WriteLine("Победили " + p1);
+                else if(gameRez == 4)
+                    Console.WriteLine("Победили " + p2);
                 Console.Clear();
                 ShowBoard();
                 Console.WriteLine("Нажмите любую кнопку, чтобы начать заново...");
